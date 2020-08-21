@@ -17,7 +17,6 @@ import { FormHandles } from '@unform/core';
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 
-import InputMask from '../../components/InputMask';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -36,7 +35,6 @@ const SignUp: React.FC = () => {
   const navigation = useNavigation();
 
   const emailInputRef = useRef<TextInput>(null);
-  const celularInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
   const handleSignUp = useCallback(
@@ -44,7 +42,6 @@ const SignUp: React.FC = () => {
       try {
         formRef.current?.setErrors({});
 
-        /*
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'),
           email: Yup.string()
@@ -55,15 +52,18 @@ const SignUp: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        await api.post('/users', data);
+        console.log(data);
+
+
+         //await api.post('/users', data);
 
         Alert.alert(
           'Cadastro realizado!',
           'Você já pode fazer seu logon no GoBarber',
         );
 
-        navigation.goBack();
-        */
+        //navigation.goBack();
+
         console.log(data);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -104,7 +104,7 @@ const SignUp: React.FC = () => {
                 initialData={{
                   name: "Nome Inicial Teste",
                   email: "email@teste.inicial.com",
-                  cpf: "99999999999"
+                  celular: "99999999999"
                 }}
                 ref={formRef} onSubmit={handleSignUp}>
               <Input
@@ -127,25 +127,10 @@ const SignUp: React.FC = () => {
                 keyboardType="email-address"
                 returnKeyType="next"
                 onSubmitEditing={() => {
-                  celularInputRef.current?.focus();
-                }}
-              />
-              <InputMask
-                ref={celularInputRef}
-                name="celular"
-                icon="phone"
-                type="cel-phone"
-                options={{
-                  maskType: 'BRL',
-                  withDDD: true,
-                  dddMask: '(99) ',
-                }}
-                placeholder="Celular"
-                keyboardType="numbers-and-punctuation"
-                onSubmitEditing={() => {
                   passwordInputRef.current?.focus();
                 }}
               />
+
               <Input
                 ref={passwordInputRef}
                 name="password"

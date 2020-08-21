@@ -62,7 +62,6 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     return '#666360';
   }
 
-
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
   }, []);
@@ -80,10 +79,9 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   }));
 
   useEffect(() => {
-    registerField({
+    registerField<string>({
       name: fieldName,
       ref: inputValueRef.current,
-      path: 'value',
       getValue(ref: any) {
         return rawValue || ref.value;
       },

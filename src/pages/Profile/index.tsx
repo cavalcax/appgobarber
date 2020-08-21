@@ -17,7 +17,6 @@ import { FormHandles } from '@unform/core';
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 
-import InputMask from '../../components/InputMask';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -47,7 +46,6 @@ const Profile: React.FC = () => {
   const navigation = useNavigation();
 
   const emailInputRef = useRef<TextInput>(null);
-  const celularInputRef = useRef<TextInput>(null);
   const oldPasswordInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
@@ -216,22 +214,6 @@ const Profile: React.FC = () => {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 returnKeyType="next"
-                onSubmitEditing={() => {
-                  celularInputRef.current?.focus();
-                }}
-              />
-              <InputMask
-                ref={celularInputRef}
-                name="celular"
-                icon="phone"
-                type="cel-phone"
-                options={{
-                  maskType: 'BRL',
-                  withDDD: true,
-                  dddMask: '(99) ',
-                }}
-                placeholder="Celular"
-                keyboardType="numbers-and-punctuation"
                 onSubmitEditing={() => {
                   oldPasswordInputRef.current?.focus();
                 }}
